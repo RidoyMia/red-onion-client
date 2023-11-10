@@ -1,6 +1,6 @@
 
 
-
+"use client"
 
 import React, { useEffect } from 'react';
 import {analytics} from "../../../firebase.config"
