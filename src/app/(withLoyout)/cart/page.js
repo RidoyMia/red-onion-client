@@ -22,7 +22,7 @@ const page = () => {
         }
         else{
             console.log('ami');
-            fetch(`http://localhost:5000/api/v1/order/user/${user?.email}`,{
+            fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/user/${user?.email}`,{
                 method : 'GET',
                 headers : {
                     accesstoken : token

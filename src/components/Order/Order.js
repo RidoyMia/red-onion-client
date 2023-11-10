@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Loading from  "../../components/Loading/Loading"
 
 const Order = ({order}) => {
-    console.log(order,'order page');
+    const[loading,setLoading] = useState(false)
     const handleSubmit = ()=>{
+        setLoading(true)
         console.log('order id ',order?.id);
+        fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/${order?.id}`,{
+            method : 'PATCH',
+            headers : {
+                'CONTENT-TYPE' : 'application/json'
+            }
+        }).then(res => res.json()).then(data =>{
+            setLoading(false)
+            console.log(data);
+        })
+        setLoading(false)
+    }
+    if(loading){
+        console.log('loading');
+        return <Loading></Loading>
     }
     return (
         <div className='grid grid-cols-3 gap-x-5 px-2 lg:px-10 md:px-10 border rounded-md shadow-xl py-5 px-5 '>
