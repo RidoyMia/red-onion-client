@@ -1,9 +1,65 @@
-import React from 'react';
+"use client"
+import React, { useContext } from 'react';
+import logo from "../../../components/images/logo2.png"
+import Image from 'next/image';
+
+import { updateProfile } from 'firebase/auth';
+import Link from 'next/link';
+import { AuthContext } from '../../../components/AuthProver/AuthProvider';
 
 const page = () => {
+  const {user,loading,createUser,loginUser} = useContext(AuthContext);
+ console.log(user);
+  const handleSubmit = (e)=>{
+    e.preventDefault()
+    const form = e.target;
+   
+    const email = form.email.value;
+    const password = form.password.value;
+
+   
+    loginUser(email,password).then(res => {
+     
+    if(res?.user){
+      fetch(`https://red-onion-server-delta.vercel.app/api/v1/user/${res?.user?.email}`,{
+        method : 'POST'
+      }).then(res => res.json()).then(data =>{
+       if(data?.action){
+      console.log(data?.accesstoken);
+        localStorage.setItem('accesstoken', data?.accesstoken)
+       }
+      })
+    };
+     }).catch(e=>{
+      console.log(e);
+     })
+    
+  }
     return (
-        <div>
-            <h1>This is login page</h1>
+        <div className=''>
+            <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3'>
+                <div></div>
+                <div>
+                   <div className='flex justify-center '>
+                     <Image src={logo} width={200} alt='logo'></Image>
+                   </div>
+                   <div className='px-10 bg-gray-50 py-10 '>
+                     <form onSubmit={handleSubmit}>
+                        <div >
+                          
+                           <input type='email' autoComplete='false' className='w-full py-3 my-3 shadow-inner outline-none bg-gray-300 px-5 rounded-md' name='email' placeholder='Email'></input>
+                           <input type='password' autoComplete='false' className='w-full py-3 my-3 shadow-inner outline-none bg-gray-300 px-5 rounded-md' name='password' placeholder='Password'></input>
+                          
+                        </div>
+
+                        <button type='submit' className='bg-red-600 w-full text-white py-3 mt-2 rounded-md'>Submit</button>
+                        <h1 className='text-red-500 text-center py-3 underline'><Link href="/register">Are You new? Register</Link></h1>
+                     </form>
+                   </div>
+                </div>
+               
+      
+            </div>
         </div>
     );
 };

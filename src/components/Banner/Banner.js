@@ -4,7 +4,7 @@ const Banner = () => {
     return (
         <div>
             <div className='banner-container'>
-      <div className='py-48 px-10'>
+      <div className='py-20 lg:py-48 px-10'>
         <h1 className='text-xl pb-5 md:text-2xl lg:4xl xl:text-5xl text-center'>Best food waitting for your belly</h1>
         <div>
           <form>

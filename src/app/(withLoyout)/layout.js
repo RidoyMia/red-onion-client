@@ -1,12 +1,19 @@
-import Header from '@/components/shared/Header/Header';
+
+
+
+
 import React from 'react';
+import Header from '../../components/shared/Header/Header';
+import AuthProvider from '../../components/AuthProver/AuthProvider';
 
 const layout = ({children}) => {
     return (
-        <div>
+        <>
+           <AuthProvider>
             <Header></Header>
             {children}
-        </div>
+            </AuthProvider>
+        </>
     );
 };
 

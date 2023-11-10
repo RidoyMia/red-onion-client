@@ -35,3 +35,21 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.icon-container{
+    height: 20px !important;
+    width: 30px !important;
+    border-radius: 50%;
+    background-color: red;
+}
+.icon{
+  
+    height: 20px !important;
+    width: 30px !important;
+}
+
+.order-banner-container{
+    background-image: url("../assets/hungry-handsome-man-holds-hamburger-his-hand-yellow-background.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
