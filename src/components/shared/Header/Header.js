@@ -1,6 +1,6 @@
 "use client"
 import Link from 'next/link';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import logo from "../../images/logo2.png"
 import Image from 'next/image';
 import { AuthContext } from '../../AuthProver/AuthProvider';
@@ -9,8 +9,27 @@ import { AuthContext } from '../../AuthProver/AuthProvider';
 
 
 const Header = () => {
+  
   const {user,LogOut} = useContext(AuthContext);
-
+  const [admin,setAdmin] = useState(false)
+  useEffect(()=>{
+    
+     fetch(`https://red-onion-server-delta.vercel.app/api/v1/user/${user?.email}`, {
+        method: 'POST'
+      }).then(res =>res.json()).then(data =>{
+       
+        if(data?.result?.role !=='admin'){
+           
+            setAdmin(false)
+            
+        }
+        else{
+          setAdmin(true)
+        }
+        
+      })
+     
+},[user])
  const logout = ()=>{
   localStorage.removeItem('accesstoken')
   LogOut().then(res => {
@@ -45,7 +64,7 @@ const Header = () => {
       <Link className='link' href="/cart">Cart</Link>
      
      {
-      user?   <Link className='link' href="/dashboard">Dashboard</Link> : ''
+      user && admin ?   <Link className='link' href="/dashboard">Dashboard</Link> : ''
      }
 
 {

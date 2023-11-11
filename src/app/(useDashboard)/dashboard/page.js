@@ -1,26 +1,43 @@
-import React from 'react';
+"use client"
+import React, { useContext, useEffect, useState } from 'react';
 import logo from "../../../components/images/logo2.png"
 import Image from 'next/image';
 import Link from 'next/link';
 
-const page = () => {
-    return (
-        <div className='py-2 '>
-            <Image src={logo} className='h-16 w-52' alt='logo'></Image>
+import { useRouter } from 'next/navigation';
+import Loading from '../../../components/Loading/Loading';
+import { AuthContext } from '../../../components/AuthProver/AuthProvider';
 
-           <div className='grid grid-cols-3 lg:grid-cols-10  bg-gray-200 text-white'>
-              <div className='col-span-0 lg:col-span-1 '>
-                 <div className='py-5 ' style={{height : '100vh'}}>
-                    <Link className='py-1 my-2 lg:px-5  px-2 bg-gray-50   shadow-lg border text-black font-semibold rounded-md ' href="/dashboard">Dashboard</Link><br></br><br></br>
-                    <Link className='py-1 my-2 lg:px-12 px-9  bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/cart">Cart</Link><br></br><br></br>
-                    <Link className='py-1 my-2 lg:px-5  px-20 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/order">order</Link><br></br><br></br>
-                   
-                 </div>
-              </div>
-              <div className=' col-span-2 lg:col-span-9 bg-red-300'>
-                <p>j</p>
-              </div>
-            </div> 
+
+const page = () => {
+    const [loading,setLoading] = useState(true)
+    const {user} = useContext(AuthContext)
+    const router = useRouter()
+    useEffect(()=>{
+        setLoading(true)
+        fetch(`https://red-onion-server-delta.vercel.app/api/v1/user/${user?.email}`, {
+            method: 'POST'
+          }).then(res =>res.json()).then(data =>{
+           
+            if(data?.result?.role !=='admin'){
+               
+                console.log(data,'from dsa ');
+               return router.push('/')
+                
+            }
+            else{
+                console.log(data,'from dashboard');
+            }
+          })
+          setLoading(false)
+    },[user])
+    if(loading){
+        return <Loading></Loading>
+    }
+ 
+    return (
+        <div>
+            <h1>Hridoy</h1>
         </div>
     );
 };
