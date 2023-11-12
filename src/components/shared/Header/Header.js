@@ -33,9 +33,9 @@ const Header = () => {
  const logout = ()=>{
   localStorage.removeItem('accesstoken')
   LogOut().then(res => {
-    console.log(res);
+    
   }).catch(e=>{
-    console.log(e);
+   
   })
  }
     return (

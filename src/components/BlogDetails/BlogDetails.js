@@ -6,7 +6,7 @@ const BlogDetails = ({id}) => {
     const [blog,setBlog] = useState({});
     useEffect(()=>{
         fetch(`https://red-onion-server-delta.vercel.app/api/v1/blogs/${id}`).then(res => res.json()).then(data =>{
-            console.log(data,'from details');
+           
             setBlog(data?.result)
         })
     },[id])

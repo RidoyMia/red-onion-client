@@ -11,7 +11,7 @@ import { useRouter } from 'next/navigation';
 const Page = () => {
   const { user, loading, createUser, loginUser } = useContext(AuthContext);
   const [isLoading, setLoading] = useState(false);
-  console.log(user);
+  
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -30,7 +30,7 @@ const Page = () => {
             .then((res) => res.json())
             .then((data) => {
               if (data?.action) {
-                console.log(data, 'user');
+              
                 localStorage.setItem('accesstoken', data?.accesstoken);
                 if (data?.result.role === 'admin') {
                   router.push('/dashboard');
@@ -43,7 +43,7 @@ const Page = () => {
         }
       })
       .catch((e) => {
-        console.log(e);
+        
       });
   };
 

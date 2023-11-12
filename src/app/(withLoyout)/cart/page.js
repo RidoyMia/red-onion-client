@@ -21,7 +21,7 @@ const page = () => {
            router.push('/login')
         }
         else{
-            console.log('ami');
+          
             fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/user/${user?.email}`,{
                 method : 'GET',
                 headers : {
@@ -31,9 +31,9 @@ const page = () => {
                 if(data?.message){
                     localStorage.removeItem('accesstoken')
                     LogOut().then(res => {
-                        console.log(res);
+                      
                     }).catch(e=>{
-                        console.log(e);
+                        
                     
                     })
                 }
@@ -46,8 +46,7 @@ const page = () => {
         }
        
     },[user]);
-    console.log(accesstoken);
-   console.log(accesstoken,'hmm');
+    
     
   
    

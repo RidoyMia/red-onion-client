@@ -5,7 +5,7 @@ const Order = ({order}) => {
     const[loading,setLoading] = useState(false)
     const handleSubmit = ()=>{
         setLoading(true)
-        console.log('order id ',order?.id);
+      
         fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/${order?.id}`,{
             method : 'PATCH',
             headers : {
@@ -13,12 +13,12 @@ const Order = ({order}) => {
             }
         }).then(res => res.json()).then(data =>{
             setLoading(false)
-            console.log(data);
+            
         })
         setLoading(false)
     }
     if(loading){
-        console.log('loading');
+        
         return <Loading></Loading>
     }
     return (

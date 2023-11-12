@@ -7,7 +7,7 @@ const Blog = () => {
     const [blog,setBlog] = useState([])
     fetch(`https://red-onion-server-delta.vercel.app/api/v1/blogs/all`).then(res => res.json()).then(data =>{
         setBlog(data?.result)
-        console.log(data);
+       
     })
     return (
         <div className='xl:container px-5'>

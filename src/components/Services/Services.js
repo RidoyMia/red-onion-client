@@ -17,7 +17,7 @@ const Services = () => {
         setLoading(true)
         fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/category/${selected}`).then(res => res.json()).then(data =>{
             setFoods(data?.result)
-            console.log(data);
+            
         })
         setLoading(false)
     },[selected]);
@@ -40,7 +40,7 @@ if(loading){
             <div>
                 <div className='grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 lg:gap-x-2 xl:gap-x-10 md:gap-x-10 gap-x-2 gap-y-20 py-20'>
                    {
-                    foods?.map((p,index) => <div onClick={()=>router.push(`/details/${p?.id}`)} key={index} className='   rounded-md  hover:shadow-xl mx-1 md:px-5  lg:mx-10 py-1 lg:py-10'>
+                    foods?.map((p,index) => <div onClick={()=>router.push(`/details/${p?.id}`)} key={index} className='   rounded-md  hover:shadow-xl mx-1 md:px-5  lg:mx-10 py-1 lg:py-10 cursor-pointer'>
                         <div className='flex justify-center items-center align-middle'>
                             <img src={p?.picture} width={200}></img>
                         </div>

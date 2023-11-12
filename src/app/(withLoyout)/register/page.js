@@ -47,14 +47,14 @@ const page = () => {
                 router.push('/')
               }
            }).catch(e =>{
-            console.log(e);
+           
            })
          }).catch((error) => {
            
          });
      }
      }).catch(e=>{
-      console.log(e);
+      
      })
     }
     form.reset()

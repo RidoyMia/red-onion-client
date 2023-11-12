@@ -11,7 +11,7 @@ const Details = ({id}) => {
     const [food,setFood] = useState({})
     useEffect(()=>{
         fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/${id}`).then(res => res.json()).then(data =>{
-            console.log(data?.result[0],'from details');
+           
             setFood(data?.result[0])
         })
     },[id]);
@@ -27,7 +27,7 @@ const Details = ({id}) => {
         if(!user){
          toast.error('Please login')
         }
-        console.log('ami',{...food});
+        
     }
     const handleOrder = e =>{
         
@@ -46,8 +46,7 @@ const Details = ({id}) => {
         const orderData = {
             email,number,address,needQuantity,productId : parseInt(id)
         }
-        console.log(orderData,'dddd');
-        console.log(orderData,'order');
+        
         fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/create`,{
             method : 'POST',
             headers : {
@@ -55,7 +54,7 @@ const Details = ({id}) => {
             },
             body : JSON.stringify(orderData)
         }).then(res =>res.json()).then(data =>{
-            console.log(data,'order');
+            
             if(data?.result){
                 toast.success('order press successfully')
 
