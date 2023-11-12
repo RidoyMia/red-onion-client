@@ -35,10 +35,10 @@ const page = () => {
         setLoading(true)
         const accesstoken = localStorage.getItem('accesstoken')
         setToken(accesstoken)
-        fetch(`https://red-onion-server-delta.vercel.app/api/v1/user/${user?.email}`, {
+           fetch(`https://red-onion-server-delta.vercel.app/api/v1/user/${user?.email}`, {
             method: 'POST'
           }).then(res =>res.json()).then(data =>{
-           
+            console.log(data,accesstoken,'from cors');
             if(data?.result?.role !=='admin'){
                
                
@@ -48,21 +48,15 @@ const page = () => {
             else{
               fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/chart/${user?.email}`,{
                 headers : {
-                    accesstoken : token
+                    accesstoken 
                 }
                }).then(res =>res.json()).then(data =>{
                 setProduct(data?.result)
-                console.log(data);
+                console.log(data,'products');
             if(data?.result){
               fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/all`).then(res=>res.json()).then(data=>{
                 // setTotalOrders(data?.result)
-               
-                if(data?.result){
-                  setTotalProducts(data?.result?.total);
-                  fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/all/count`).then(res=>res.json()).then(data=>{
-                   setTotalOrders(data?.result)
-                    })
-                }
+                setTotalProducts(data?.result?.total);
                 setLoading(false)
                })
             }
@@ -74,7 +68,9 @@ const page = () => {
     },[user])
 
  
-   
+   fetch(`https://red-onion-server-delta.vercel.app/api/v1/order/all/count`).then(res=>res.json()).then(data=>{
+    setTotalOrders(data?.result)
+   })
    
    
     if(loading){
