@@ -19,9 +19,9 @@ const dashboardLayout = ({children}) => {
            <div className='grid grid-cols-3 lg:grid-cols-10 bg-gray-200  text-white'>
               <div className='col-span-0 lg:col-span-2  '>
                  <div className='py-5 ' style={{height : '100vh'}}>
-                    <Link className='py-1 my-2 lg:px-10  px-2 bg-gray-50   shadow-lg border text-black font-semibold rounded-md ' href="/dashboard">Dashboard</Link><br></br><br></br>
-                    <Link className='py-1 my-2 lg:px-16 px-9  bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/cart">Cart</Link><br></br><br></br>
-                    <Link className='py-1 my-2 lg:px-16 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/order">order</Link><br></br><br></br>
+                    <Link className='py-1 my-2 lg:px-9  px-2 bg-gray-50   shadow-lg border text-black font-semibold rounded-md ' href="/dashboard">Dashboard</Link><br></br><br></br>
+                    <Link className='py-1 my-2 lg:px-14 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/order">order</Link><br></br><br></br>
+                    <Link className='py-1 my-2 lg:px-7 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/add">Add-product</Link><br></br><br></br>
                    
                  </div>
               </div>
