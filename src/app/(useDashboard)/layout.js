@@ -21,6 +21,7 @@ const dashboardLayout = ({children}) => {
                  <div className='py-5 ' style={{height : '100vh'}}>
                     <Link className='py-1 my-2 lg:px-9  px-2 bg-gray-50   shadow-lg border text-black font-semibold rounded-md ' href="/dashboard">Dashboard</Link><br></br><br></br>
                     <Link className='py-1 my-2 lg:px-14 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/order">order</Link><br></br><br></br>
+                    <Link className='py-1 my-2 lg:px-7 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/product">Products</Link><br></br><br></br>
                     <Link className='py-1 my-2 lg:px-7 px-7 bg-gray-50   shadow-lg border text-black font-semibold rounded-md' href="/dashboard/add">Add-product</Link><br></br><br></br>
                    
                  </div>

@@ -1,10 +1,12 @@
 "use client"
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
-import Loading from "../../../../components/Loading/Loading";
+
 import toast,{Toaster} from "react-hot-toast";
 import { useRouter } from "next/navigation";
-const page = () => {
+import Loading from "../../../../../components/Loading/Loading";
+const page = ({params}) => {
+    const {id} = params
     const router = useRouter()
     const [category,setCategory] = useState([])
     const [loading,setLoading] = useState(true)
@@ -40,11 +42,12 @@ const page = () => {
                             name : data?.name,
                             descriptions : data?.descriptions,
                             picture :result?.data?.url,
-                            price : parseInt(data?.price)
+                            price : parseInt(data?.price),
+                            
 
                         }
-                        fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/create`,{
-                            method : 'POST',
+                        fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/${id}`,{
+                            method : 'PATCH',
                             headers : {
                                 'CONTENT-TYPE' : 'application/json'
                             },
@@ -52,7 +55,7 @@ const page = () => {
                         }).then(res => res.json()).then(data =>{
                             console.log(data,'insertData');
                             if(data?.action){
-                                toast.success('Iteam added completed')
+                                toast.success('Iteam updated completed')
                                 router.push('/dashboard/product')
                             }
                             if(data?.message){
