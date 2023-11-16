@@ -2,22 +2,22 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form"
 
-import toast,{Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Loading from "../../../../../components/Loading/Loading";
-const page = ({params}) => {
-    const {id} = params
+const page = ({ params }) => {
+    const { id } = params
     const router = useRouter()
-    const [category,setCategory] = useState([])
-    const [loading,setLoading] = useState(true)
-    useEffect(()=>{
+    const [category, setCategory] = useState([])
+    const [loading, setLoading] = useState(true)
+    useEffect(() => {
         setLoading(true)
-        fetch(`https://red-onion-server-delta.vercel.app/api/v1/category/all`).then(res => res.json()).then(data=>{
-        setCategory(data?.result)
-        console.log(data?.result);
-        setLoading(false)
-    })
-    },[])
+        fetch(`https://red-onion-server-delta.vercel.app/api/v1/category/all`).then(res => res.json()).then(data => {
+            setCategory(data?.result)
+            console.log(data?.result);
+            setLoading(false)
+        })
+    }, [])
     const {
         register,
         handleSubmit,
@@ -28,49 +28,49 @@ const page = ({params}) => {
         setLoading(true)
         const image = data?.image[0]
         const formData = new FormData()
-        formData.append('image',image)
-        const keyis =`bd0f22832703db189e737da27b90a211`
+        formData.append('image', image)
+        const keyis = `bd0f22832703db189e737da27b90a211`
         const url = `https://api.imgbb.com/1/upload?key=${keyis}`
-        fetch(url,{
-            method : "POST",
-            body : formData
-                }).then(res => res.json()).then(result => {
-                    console.log(result?.data?.url);
-                    if(result?.data?.url){
-                        const iteamData = {
-                            categoryID : parseInt(data?.Category),
-                            name : data?.name,
-                            descriptions : data?.descriptions,
-                            picture :result?.data?.url,
-                            price : parseInt(data?.price),
-                            
+        fetch(url, {
+            method: "POST",
+            body: formData
+        }).then(res => res.json()).then(result => {
+            console.log(result?.data?.url);
+            if (result?.data?.url) {
+                const iteamData = {
+                    categoryID: parseInt(data?.Category),
+                    name: data?.name,
+                    descriptions: data?.descriptions,
+                    picture: result?.data?.url,
+                    price: parseInt(data?.price),
 
-                        }
-                        fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/${id}`,{
-                            method : 'PATCH',
-                            headers : {
-                                'CONTENT-TYPE' : 'application/json'
-                            },
-                            body : JSON.stringify(iteamData)
-                        }).then(res => res.json()).then(data =>{
-                            console.log(data,'insertData');
-                            if(data?.action){
-                                toast.success('Iteam updated completed')
-                                router.push('/dashboard/product')
-                            }
-                            if(data?.message){
-                                toast.error(`${data?.message}`)
-                            }
-                        })
-                        console.log(iteamData);
-                       setLoading(false) 
+
+                }
+                fetch(`https://red-onion-server-delta.vercel.app/api/v1/foods/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'CONTENT-TYPE': 'application/json'
+                    },
+                    body: JSON.stringify(iteamData)
+                }).then(res => res.json()).then(data => {
+                    console.log(data, 'insertData');
+                    if (data?.action) {
+                        toast.success('Iteam updated completed')
+                        router.push('/dashboard/product')
                     }
-                    else{
-                        toast.error('something went wrong')
+                    if (data?.message) {
+                        toast.error(`${data?.message}`)
                     }
                 })
+                console.log(iteamData);
+                setLoading(false)
+            }
+            else {
+                toast.error('something went wrong')
+            }
+        })
     }
-    if(loading){
+    if (loading) {
         return <Loading></Loading>
     }
     return (
@@ -88,7 +88,7 @@ const page = ({params}) => {
                                 {
                                     category?.map(p => <option value={p?.id}>{p?.name}</option>)
                                 }
-                               
+
                             </select>
 
                             <textarea type='text' autoComplete='false' className='w-full py-3 my-3 shadow-inner outline-none bg-gray-300 px-5 rounded-md' {...register("descriptions")} placeholder='descriptions'></textarea>
